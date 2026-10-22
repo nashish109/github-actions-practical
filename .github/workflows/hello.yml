@@ -18,3 +18,13 @@ jobs:
 
       - name: Display date
         run: date
+
+      - name: Verify repository secret
+        env:
+          PRACTICAL_MESSAGE: ${{ secrets.PRACTICAL_MESSAGE }}
+        run: |
+          if [ -z "$PRACTICAL_MESSAGE" ]; then
+            echo "Secret is missing."
+            exit 1
+          fi
+          echo "Repository secret is configured and available."
